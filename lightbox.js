@@ -55,7 +55,7 @@ $(document).ready(function() {
   
     $img.fadeOut(300, function() {
       $img.attr("src", newSource).fadeIn(300);
-      $img.css("opacity", ""); // Reset opacity after the animation
+      $img.css("opacity", ""); 
       updateAltText($images.eq(currentIndex).attr("alt"));
       endButtons();
     });
@@ -93,9 +93,9 @@ $(document).ready(function() {
     $lightbox.removeClass("active").hide();
     $lightboxMask.fadeOut(300);
     $lightbox.find(".alt-text").fadeOut(300, function() {
-      $(this).remove(); // Remove the alt-text after fading out
+      $(this).remove(); 
     });
-    $lightbox.find("img").css("opacity", ""); // Reset opacity
+    $lightbox.find("img").css("opacity", ""); 
   }
 
 
@@ -114,9 +114,9 @@ $(document).ready(function() {
 
   function handleGesture() {
     if (touchEndX < touchStartX) {
-      nextImage(); // Swipe left, go to the next image
+      nextImage(); 
     } else if (touchEndX > touchStartX) {
-      prevImage(); // Swipe right, go to the previous image
+      prevImage(); 
     }
   }
 });

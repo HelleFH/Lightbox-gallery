@@ -48,14 +48,13 @@ $(document).ready(function() {
 
   $previous.on("click", prevImage);
   $next.on("click", nextImage);
-
   function updateImage() {
     const newSource = $images.eq(currentIndex).attr("src");
     const $img = $lightbox.find("img");
-  
+    
     $img.fadeOut(300, function() {
       $img.attr("src", newSource).fadeIn(300);
-      $img.css("opacity", ""); 
+      $img.css("transform", "translateX(0)"); // Reset the translateX after the animation
       updateAltText($images.eq(currentIndex).attr("alt"));
       endButtons();
     });
@@ -111,12 +110,22 @@ $(document).ready(function() {
     touchEndX = e.changedTouches[0].clientX;
     handleGesture();
   });
-
   function handleGesture() {
+    const $img = $lightbox.find("img");
     if (touchEndX < touchStartX) {
-      nextImage(); 
+      currentIndex++;
+      if (currentIndex >= $images.length - 1) {
+        currentIndex = $images.length - 1;
+      }
+      $img.css("transform", "translateX(100%)");
+      updateImage();
     } else if (touchEndX > touchStartX) {
-      prevImage(); 
+      currentIndex--;
+      if (currentIndex <= 0) {
+        currentIndex = 0;
+      }
+      $img.css("transform", "translateX(-100%)");
+      updateImage();
     }
   }
 });

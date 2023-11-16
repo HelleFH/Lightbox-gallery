@@ -5,6 +5,8 @@ $(document).ready(function() {
   const $images = $(".box-image img");
   const $previous = $("#prev-button");
   const $next = $("#next-button");
+  const $imgAlt = $(this).attr("alt");
+
   let currentIndex;
 
   $images.on("click", function() {
@@ -50,14 +52,15 @@ $(document).ready(function() {
   function updateImage() {
     const newSource = $images.eq(currentIndex).attr("src");
     const $img = $lightbox.find("img");
-
+  
     $img.fadeOut(300, function() {
       $img.attr("src", newSource).fadeIn(300);
+      $img.css("opacity", ""); // Reset opacity after the animation
       updateAltText($images.eq(currentIndex).attr("alt"));
       endButtons();
     });
   }
-
+  
   function nextImage() {
     currentIndex++;
     if (currentIndex >= $images.length - 1) {
@@ -87,8 +90,34 @@ $(document).ready(function() {
   }
 
   function closeLightbox() {
-    $lightbox.fadeOut(300).removeClass("active");
+    $lightbox.removeClass("active").hide();
     $lightboxMask.fadeOut(300);
-    $lightbox.find(".alt-text").remove();
+    $lightbox.find(".alt-text").fadeOut(300, function() {
+      $(this).remove(); // Remove the alt-text after fading out
+    });
+    $lightbox.find("img").css("opacity", ""); // Reset opacity
+  }
+
+
+  
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  $lightbox.on('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].clientX;
+  });
+
+  $lightbox.on('touchend', function(e) {
+    touchEndX = e.changedTouches[0].clientX;
+    handleGesture();
+  });
+
+  function handleGesture() {
+    if (touchEndX < touchStartX) {
+      nextImage(); // Swipe left, go to the next image
+    } else if (touchEndX > touchStartX) {
+      prevImage(); // Swipe right, go to the previous image
+    }
   }
 });
+

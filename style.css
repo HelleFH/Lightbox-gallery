@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+#wrapper {
+    max-width: 1040px;
+    margin: 0 auto;
+    background-color: rgb((123, 174, 55, 0.8));
+    background-size: 100vh;
+    z-index: 9999
+}
+
+body {
+    font-family: 'Rubik';
+    box-sizing: border-box;
+    margin: 0;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.title {
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/Helle_field_with_dinosaurs_meteor_in_the_background_ocean_in_ba_aca21854-c2e8-4c86-8448-2f32388fa8b9.png');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.dinosaur-gallery {
+    background: linear-gradient(to bottom, rgba(204, 206, 208, 0.9), rgba(204, 206, 208, 0.95));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+    justify-content: center;
+    gap: 0.6em;
+    padding: 1em;
+    border-radius: 5px;
+    max-width: 80vw;
+    margin-bottom: 7em;
+}
+
+.box-image {
+    width: 100%;
+    display: flex;
+    background-color: rgba(204, 206, 208, 0.9);
+    background: linear-gradient(to bottom, rgba(204, 206, 208, 0.9), rgba(204, 206, 208, 0.95));
+}
+
+.box-image>div {
+    flex: 1;
+    padding: 1%;
+}
+
+/*-- Lightbox: --*/
+#lightbox_mask {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: 9996;
+    display: flex;
+}
+
+#lightbox-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1em;
+}
+
+.box-image {
+    max-width: 300px;
+    min-width: 200px;
+}
+
+#lightbox {
+    color: black;
+    background-color: rgba(204, 206, 208, 0.9);
+    background: linear-gradient(to bottom, rgba(204, 206, 208, 0.9), rgba(204, 206, 208, 0.95));
+    position: absolute;
+    max-width: 60%;
+    line-height: 25px;
+    padding: 0.6em;
+    z-index: 3;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto;
+    z-index: 9998;
+    font-size: 16px;
+    text-align: center;
+}
+
+#close-button {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    z-index: 9999;
+    right: 15px;
+    top: 10px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#close-button:hover {
+    color: rgba(255, 255, 255, 0.7);
+    transform: scale(0.9);
+border-radius: 100%;
+
+}
+
+
+#close-button:active {transform: scale(0.85);     color: rgba(255, 255, 255, 0.8);
+;    
+}
+#prev-button {
+    grid-area: 1 / 1 / 2 / 2;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 9999;
+    align-self: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#next-button:hover,
+#prev-button:hover {
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    transform: scale(0.95);
+}
+
+
+#next-button:active,
+#prev-button:active {
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(0.90);
+}
+
+@keyframes expand {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.fa-chevron-left:before,
+.fa-chevron-right:before {
+    display: block;
+    height: fit-content;
+    width: fit-content;
+}
+
+#next-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 100%;
+    color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
+    grid-area: 1 / 1 / 2 / 2;
+    justify-self: end;
+    align-self: center;
+}
+
+#prev-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100%;
+    color: white;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+
+.box-image img:hover {
+    transition: all 0.3s;
+    transform: scale(1.01);
+}
+
+.box-image img {
+    border: solid 1px #646464;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: transform .3s ease-out;
+}
+
+.active img {
+    max-height: 80vh;
+}
+
+@media screen and (max-width:1024px) {
+    #lightbox {
+        width: 80%;
+        left: auto;
+        max-width: 80%;
+
+    }
+    .active img {
+        max-height: 60vh;
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    section {
+        width: 100%;
+    }
+
+    .box-image {
+        flex-direction: column;
+    }
+
+    #lightbox {
+        max-width: 96vw;
+        width: 100%;
+        left: auto;
+        margin: 0 auto;
+
+
+    }
+
+    .active img {
+        max-height: 50vh;
+    }
+
+}

@@ -117,16 +117,19 @@ $(document).ready(function() {
       if (currentIndex >= $images.length - 1) {
         currentIndex = $images.length - 1;
       }
-      $img.css("transform", "translateX(100%)");
+      $img.css("transform", "translateX(100vw)");
       updateImage();
     } else if (touchEndX > touchStartX) {
       currentIndex--;
       if (currentIndex <= 0) {
         currentIndex = 0;
       }
-      $img.css("transform", "translateX(-100%)");
+      $img.css("transform", "translateX(-100vw)");
       updateImage();
     }
   }
+  $lightbox.on('touchmove', function(e) {
+    e.preventDefault();
+  });
 });
 

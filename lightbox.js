@@ -110,6 +110,18 @@ $(document).ready(function() {
     touchEndX = e.changedTouches[0].clientX;
     handleGesture();
   });
+
+  $(document).keydown(function (e) {
+    if ($lightbox.hasClass('active')) {
+      if (e.which === 37) {
+        // Left arrow key
+        prevImage();
+      } else if (e.which === 39) {
+        // Right arrow key
+        nextImage();
+      }
+    }
+  });
   function handleGesture() {
     const $img = $lightbox.find("img");
     if (touchEndX < touchStartX) {
